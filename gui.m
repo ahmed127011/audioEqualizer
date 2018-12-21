@@ -22,7 +22,7 @@ function varargout = gui(varargin)
 
 % Edit the above text to modify the response to help gui
 
-% Last Modified by GUIDE v2.5 20-Dec-2018 22:04:26
+% Last Modified by GUIDE v2.5 21-Dec-2018 01:22:08
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -72,11 +72,24 @@ function varargout = gui_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
+%=============================================
 
 %=======================================================
 
 function play_equalizer(hObject, handles)
 global player;
+global y0;
+global y2;
+global y3;
+global y4;
+global y5;
+global y6;
+global y7;
+global y8;
+global y9;
+global y10;
+
+
 [handles.y,handles.Fs] = audioread(handles.fullpathname);
 handles.g1=get(handles.b1,'value');
 handles.g2=get(handles.b2,'value');
@@ -150,6 +163,7 @@ cut_off2=16001;
 c=fir1(orde,cut_off2/(handles.Fs/2),'high');
 y10=handles.g9*filter(c,1,handles.y);
  handles.yT=y0+y10+y2+y3+y4+y5+y6+y7+y8+y9;
+ y10 = handles.yT;
 player = audioplayer(handles.yT, handles.Fs);
  subplot(2,1,1);
  plot(handles.y);
@@ -482,3 +496,127 @@ function b9_CreateFcn(hObject, eventdata, handles)
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
+
+
+% --- Executes on slider movement.
+function panel_slider_Callback(hObject, eventdata, handles)
+% hObject    handle to panel_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function panel_slider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to panel_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on button press in bp9.
+function bp9_Callback(hObject, eventdata, handles)
+% hObject    handle to bp9 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global y9;
+set(handles.secPlotLbl,'String','14000-16000 Hz filter')
+ subplot(2,1,2);
+ plot(y9);
+
+% --- Executes on button press in bp8.
+function bp8_Callback(hObject, eventdata, handles)
+% hObject    handle to bp8 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global y8;
+set(handles.secPlotLbl,'String','12000-14000 Hz filter')
+ subplot(2,1,2);
+ plot(y8);
+
+% --- Executes on button press in bp7.
+function bp7_Callback(hObject, eventdata, handles)
+% hObject    handle to bp7 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global y7;
+set(handles.secPlotLbl,'String','6000-12000 Hz filter')
+ subplot(2,1,2);
+ plot(y7);
+
+% --- Executes on button press in bp6.
+function bp6_Callback(hObject, eventdata, handles)
+% hObject    handle to bp6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global y6;
+set(handles.secPlotLbl,'String','3000-6000 Hz filter')
+ subplot(2,1,2);
+ plot(y6);
+
+% --- Executes on button press in bp5.
+function bp5_Callback(hObject, eventdata, handles)
+% hObject    handle to bp5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global y5;
+set(handles.secPlotLbl,'String','1000-3000 Hz filter')
+ subplot(2,1,2);
+ plot(y5);
+
+% --- Executes on button press in bp4.
+function bp4_Callback(hObject, eventdata, handles)
+% hObject    handle to bp4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global y4;
+set(handles.secPlotLbl,'String','600-1000 Hz filter')
+ subplot(2,1,2);
+ plot(y4);
+
+% --- Executes on button press in pb3.
+function pb3_Callback(hObject, eventdata, handles)
+% hObject    handle to pb3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global y3;
+set(handles.secPlotLbl,'String',' 310-600 Hz filter')
+ subplot(2,1,2);
+ plot(y3);
+
+% --- Executes on button press in bp2.
+function bp2_Callback(hObject, eventdata, handles)
+% hObject    handle to bp2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global y2;
+set(handles.secPlotLbl,'String','170-310 Hz filter')
+ subplot(2,1,2);
+ plot(y2);
+
+% --- Executes on button press in bp1.
+function bp1_Callback(hObject, eventdata, handles)
+% hObject    handle to bp1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global y0;
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+ subplot(2,1,2);
+ plot(y0);
+
+
+% --- Executes on button press in bpT.
+function bpT_Callback(hObject, eventdata, handles)
+% hObject    handle to bpT (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global y10;
+set(handles.secPlotLbl,'String','filtered')
+ subplot(2,1,2);
+ plot(y10);
