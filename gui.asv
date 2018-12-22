@@ -76,85 +76,65 @@ varargout{1} = handles.output;
 
 %=======================================================
 
-function play_equalizer(hObject, handles)
+function play_equalizer(hObject, handles,isFir)
 global player;
+global yArr;
+yArr=[0 170 310 600 1000 3000 6000 12000 14000 16000];
+global handl;
+global out;
 global y0;
-global y0;
+global y2;
+global y3;
+global y4;
+global y5;
+global y6;
+global y7;
+global y8;
+global y9;
+global y10;
 
+        
 [handles.y,handles.Fs] = audioread(handles.fullpathname);
-handles.g1=get(handles.b1,'value');
-handles.g2=get(handles.b2,'value');
-handles.g3=get(handles.b3,'value');
-handles.g4=get(handles.b4,'value');
-handles.g5=get(handles.b5,'value');
- handles.g6=get(handles.b6,'value');
- handles.g7=get(handles.b7,'value');
- handles.g8=get(handles.b8,'value');
- handles.g9=get(handles.b9,'value');
+handl(1)=get(handles.b1,'value');
+handl(2)=get(handles.b2,'value');
+handl(3)=get(handles.b3,'value');
+handl(4)=get(handles.b4,'value');
+handl(5)=get(handles.b5,'value');
+ handl(6)=get(handles.b6,'value');
+ handl(7)=get(handles.b7,'value');
+ handl(8)=get(handles.b8,'value');
+ handl(9)=get(handles.b9,'value');
 
 
 
- cut_off=170; %cut off low pass dalama Hz
-orde=16;
-a=fir1(orde,cut_off/(handles.Fs/2),'low');
-y0=handles.g1*filter(a,1,handles.y);
+ 
+for i=1:10
+   if(i==1)
+    if(isFir)
+     a=fir_low(handles.Fs,yArr(2));
+    else
+        a=IIR1(handles.Fs,yArr(2));
+    end
+   else
+       if(isFir)
+        a=fir_band(handles.Fs,yArr(i),yArr(i+1));
+     else
+        a=IIR2(handles.Fs,yArr(i),yArr(i+1));
+       end
+   end
+ 
+   
+       out(i)=handl(i)*filter(a,1,handles.y);
+end
 
-
-
-% %bandpass1
-f1=171;
-f2=310;
-b1=fir1(orde,[f1/(handles.Fs/2) f2/(handles.Fs/2)],'bandpass');
-y2=handles.g2*filter(b1,1,handles.y);
-% 
-% %bandpass2
-f3=311;
-f4=600;
-b2=fir1(orde,[f3/(handles.Fs/2) f4/(handles.Fs/2)],'bandpass');
-y3=handles.g3*filter(b2,1,handles.y);
-% 
-% %bandpass3
- f4=601;
-f5=1000;
- b3=fir1(orde,[f4/(handles.Fs/2) f5/(handles.Fs/2)],'bandpass');
- y4=handles.g4*filter(b3,1,handles.y);
-% 
-% %bandpass4
- f5=1001;
-f6=3000;
- b4=fir1(orde,[f5/(handles.Fs/2) f6/(handles.Fs/2)],'bandpass');
- y5=handles.g5*filter(b4,1,handles.y);
-% 
-% %bandpass5
-  f7=3001;
-f8=6000;
-  b5=fir1(orde,[f7/(handles.Fs/2) f8/(handles.Fs/2)],'bandpass');
-  y6=handles.g6*filter(b5,1,handles.y);
-% 
-% %bandpass6
-  f9=6001;
-f10=12000;
-  b6=fir1(orde,[f9/(handles.Fs/2) f10/(handles.Fs/2)],'bandpass');
-  y7=handles.g7*filter(b6,1,handles.y);
-% 
-% %bandpass7
-  f11=12001;
-f12=14000;
-  b7=fir1(orde,[f11/(handles.Fs/2) f12/(handles.Fs/2)],'bandpass');
-  y8=handles.g8*filter(b7,1,handles.y);
-% 
- % %bandpass8
-  f13=14001;
-f14=16000;
-  b8=fir1(orde,[f13/(handles.Fs/2) f14/(handles.Fs/2)],'bandpass');
-  y9=handles.g9*filter(b8,1,handles.y);
-% 
  %highpass
 cut_off2=16001;
 c=fir1(orde,cut_off2/(handles.Fs/2),'high');
 y10=handles.g9*filter(c,1,handles.y);
- handles.yT=y0+y10+y2+y3+y4+y5+y6+y7+y8+y9;
- arr = [y0 , y2 , y3 , y4 , y5 , y6, y7 , y8 , y9 , y10 , handles.yT];
+for i=1:10
+    handles.yT=handles.yT+handl(i);
+end
+handles.yT=handles.yT+y10;
 player = audioplayer(handles.yT, handles.Fs);
  subplot(2,1,1);
  plot(handles.y);
@@ -277,7 +257,7 @@ function Play_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global player;
-play_equalizer(hObject,handles);
+play_equalizer(hObject,handles,1);
 play(player);
 guidata(hObject,handles)
 
