@@ -196,16 +196,17 @@ end
  handles.yT=y1+y2+y3+y4+y5+y6+y7+y8+y9;
  y10=handles.yT;
 
- yf1=fft(y1);
- yf2=fft(y2);
- yf3=fft(y3);
- yf4=fft(y4);
- yf5=fft(y5);
- yf6=fft(y6);
- yf7=fft(y7);
- yf8=fft(y8);
- yf9=fft(y9);
- yf10=fft( handles.yT);
+ yf1=abs(fft(y1));
+ yf2=abs(fft(y2));
+ yf3=abs(fft(y3));
+ yf4=abs(fft(y4));
+ yf5=abs(fft(y5));
+ yf6=abs(fft(y6));
+ yf7=abs(fft(y7));
+ yf8=abs(fft(y8));
+ yf9=abs(fft(y9));
+
+ yf10=abs(fft( handles.yT));
  
  player = audioplayer(handles.yT, handles.Fs);
  subplot(2,1,1);
