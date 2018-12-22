@@ -335,7 +335,7 @@ global outputSampleRate; % output sample rate
 outputSampleRate = get(handles.osr,'String');
 selected=get(handles.filterPanel,'SelectedObject');
 filterType=get(selected,'String');
-play_equalizer(hObject,handles,1);
+play_equalizer(hObject,handles,strcmp(filterType,'fir'));
 play(player);
 guidata(hObject,handles)
 
@@ -345,7 +345,7 @@ function pause_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global player;
-play_equalizer(hObject,handles);
+%play_equalizer(hObject,handles,strcmp(filterType,fir));
 stop(player);
 guidata(hObject,handles)
 
