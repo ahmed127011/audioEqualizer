@@ -113,164 +113,78 @@ handl(9)=get(handles.b9,'value');
  end 
  y1=handl(1)*filter(a,handles.y,1);
 
-%bandpass1
+ 
+ 
+ %bandpass1
 if(isFir)
       a=fir_band(handles.Fs,yArr(1),yArr(2));
 else
-        a=IIR2(handles.Fs,yArr(2),yArr(1));
+        a=IIR2(handles.Fs,yArr(1),yArr(2));
 end
-    y1=handl( 1 )*filter(a,handles.y,1);
+    y2=handl( 2 )*filter(a,handles.y,1);
 
 %bandpass2
 if(isFir)
       a=fir_band(handles.Fs,yArr(2),yArr(3));
 else
-        a=IIR2(handles.Fs,yArr(3),yArr(2));
+        a=IIR2(handles.Fs,yArr(2),yArr(3));
 end
-    y2=handl( 2 )*filter(a,handles.y,1);
+    y3=handl( 3 )*filter(a,handles.y,1);
 
 %bandpass3
 if(isFir)
       a=fir_band(handles.Fs,yArr(3),yArr(4));
 else
-        a=IIR2(handles.Fs,yArr(4),yArr(3));
+        a=IIR2(handles.Fs,yArr(3),yArr(4));
 end
-    y3=handl( 3 )*filter(a,handles.y,1);
+    y4=handl( 4 )*filter(a,handles.y,1);
 
 %bandpass4
 if(isFir)
       a=fir_band(handles.Fs,yArr(4),yArr(5));
 else
-        a=IIR2(handles.Fs,yArr(5),yArr(4));
+        a=IIR2(handles.Fs,yArr(4),yArr(5));
 end
-    y4=handl( 4 )*filter(a,handles.y,1);
+    y5=handl( 5 )*filter(a,handles.y,1);
 
 %bandpass5
 if(isFir)
       a=fir_band(handles.Fs,yArr(5),yArr(6));
 else
-        a=IIR2(handles.Fs,yArr(6),yArr(5));
+        a=IIR2(handles.Fs,yArr(5),yArr(6));
 end
-    y5=handl( 5 )*filter(a,handles.y,1);
+    y6=handl( 6 )*filter(a,handles.y,1);
 
 %bandpass6
 if(isFir)
       a=fir_band(handles.Fs,yArr(6),yArr(7));
 else
-        a=IIR2(handles.Fs,yArr(7),yArr(6));
+        a=IIR2(handles.Fs,yArr(6),yArr(7));
 end
-    y6=handl( 6 )*filter(a,handles.y,1);
+    y7=handl( 7 )*filter(a,handles.y,1);
 
 %bandpass7
 if(isFir)
       a=fir_band(handles.Fs,yArr(7),yArr(8));
 else
-        a=IIR2(handles.Fs,yArr(8),yArr(7));
+        a=IIR2(handles.Fs,yArr(7),yArr(8));
 end
-    y7=handl( 7 )*filter(a,handles.y,1);
+    y8=handl( 8 )*filter(a,handles.y,1);
 
 %bandpass8
 if(isFir)
       a=fir_band(handles.Fs,yArr(8),yArr(9));
 else
-        a=IIR2(handles.Fs,yArr(9),yArr(8));
-end
-    y8=handl( 8 )*filter(a,handles.y,1);
-
-%bandpass9
-if(isFir)
-      a=fir_band(handles.Fs,yArr(9),yArr(10));
-else
-        a=IIR2(handles.Fs,yArr(10),yArr(9));
+        a=IIR2(handles.Fs,yArr(8),yArr(9));
 end
     y9=handl( 9 )*filter(a,handles.y,1);
 
-
-
-
-%bandpass1
-if(isFir)
-    a=fir_band(handles.Fs,yArr(3),yArr(4));
-else
-     a=IIR2(handles.Fs,yArr(3),yArr(4));
-end
-y3=handl(3)*filter(a,handles.y,1);
-
-%bandpass1
-if(isFir)
-    a=fir_band(handles.Fs,yArr(1),yArr(2));
-else
-     a=IIR2(handles.Fs,yArr(1),yArr(2));
-end
-y2=handl(2)*filter(a,handles.y,1);
-
-%bandpass1
-if(isFir)
-    a=fir_band(handles.Fs,yArr(1),yArr(2));
-else
-     a=IIR2(handles.Fs,yArr(1),yArr(2));
-end
-y2=handl(2)*filter(a,handles.y,1);
-
-%bandpass1
-if(isFir)
-    a=fir_band(handles.Fs,yArr(1),yArr(2));
-else
-     a=IIR2(handles.Fs,yArr(1),yArr(2));
-end
-y2=handl(2)*filter(a,handles.y,1);
-
-%bandpass1
-if(isFir)
-    a=fir_band(handles.Fs,yArr(1),yArr(2));
-else
-     a=IIR2(handles.Fs,yArr(1),yArr(2));
-end
-y2=handl(2)*filter(a,handles.y,1);
-
-%bandpass1
-if(isFir)
-    a=fir_band(handles.Fs,yArr(1),yArr(2));
-else
-     a=IIR2(handles.Fs,yArr(1),yArr(2));
-end
-y2=handl(2)*filter(a,handles.y,1);
-
- %highpass
-cut_off2=16001;
-c=fir1(orde,cut_off2/(handles.Fs/2),'high');
-y10=handles.g9*filter(c,1,handles.y);
- handles.yT=y0+y10+y2+y3+y4+y5+y6+y7+y8+y9;
- y10 = handles.yT;
+  
+ 
+ handles.yT=y1+y2+y3+y4+y5+y6+y7+y8+y9;
 
  
- 
-for i=1:9
-   if(i==1)
-     if(isFir)
-         a=fir_low(handles.Fs,yArr(2));
-     else
-         a=IIR1(handles.Fs,yArr(2));
-     end
-   else
-     if(isFir)
-        a=fir_band(handles.Fs,yArr(i),yArr(i+1));
-     else
-        a=IIR2(handles.Fs,yArr(i),yArr(i+1));
-     end
-   end
-       y0=handl(i)*filter(a,handles.y,1);
-end
-
- %highpass
-cut_off2=16001;
-c=fir1(16,cut_off2/(handles.Fs/2),'high');
-y10=handles.b9*filter(c,1,handles.y);
-for i=1:9
-    handles.yT=handles.yT+out(i);
-end
-handles.yT=handles.yT+y10;
-player = audioplayer(handles.yT, handles.Fs);
+ player = audioplayer(handles.yT, handles.Fs);
  subplot(2,1,1);
  plot(handles.y);
  subplot(2,1,2);
@@ -392,6 +306,9 @@ function Play_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global player;
+global filterType; % here is the global that holds the type (iir/fir)
+selected=get(handles.filterPanel,'SelectedObject');
+filterType=get(selected,'String');
 play_equalizer(hObject,handles,1);
 play(player);
 guidata(hObject,handles)
@@ -712,9 +629,18 @@ function bp1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global y0;
-set(handles.secPlotLbl,'String','0-170 Hz filter')
+global yf0;
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ set(handles.secPlotLbl,'String','0-170 Hz filter')
  subplot(2,1,2);
  plot(y0);
+else
+     
+ 
+end
+
 
 
 % --- Executes on button press in bpT.

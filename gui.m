@@ -22,7 +22,7 @@ function varargout = gui(varargin)
 
 % Edit the above text to modify the response to help gui
 
-% Last Modified by GUIDE v2.5 21-Dec-2018 01:22:08
+% Last Modified by GUIDE v2.5 23-Dec-2018 01:15:01
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -306,6 +306,11 @@ function Play_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global player;
+global filterType; % here is the global that holds the type (iir/fir)
+global outputSampleRate; % output sample rate 
+outputSampleRate = get(handles.ost,'String');
+selected=get(handles.filterPanel,'SelectedObject');
+filterType=get(selected,'String');
 play_equalizer(hObject,handles,1);
 play(player);
 guidata(hObject,handles)
@@ -546,9 +551,16 @@ function bp9_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global y9;
-set(handles.secPlotLbl,'String','14000-16000 Hz filter')
- subplot(2,1,2);
+global yf9
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf9);
+else
  plot(y9);
+end
 
 % --- Executes on button press in bp8.
 function bp8_Callback(hObject, eventdata, handles)
@@ -556,9 +568,16 @@ function bp8_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global y8;
-set(handles.secPlotLbl,'String','12000-14000 Hz filter')
- subplot(2,1,2);
+global yf8;
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf8);
+else
  plot(y8);
+end
 
 % --- Executes on button press in bp7.
 function bp7_Callback(hObject, eventdata, handles)
@@ -566,9 +585,16 @@ function bp7_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global y7;
-set(handles.secPlotLbl,'String','6000-12000 Hz filter')
- subplot(2,1,2);
+global yf7;
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf7);
+else
  plot(y7);
+end
 
 % --- Executes on button press in bp6.
 function bp6_Callback(hObject, eventdata, handles)
@@ -576,59 +602,97 @@ function bp6_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global y6;
-set(handles.secPlotLbl,'String','3000-6000 Hz filter')
- subplot(2,1,2);
+global yf6;
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf6);
+else
  plot(y6);
-
+end
 % --- Executes on button press in bp5.
 function bp5_Callback(hObject, eventdata, handles)
 % hObject    handle to bp5 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global y5;
-set(handles.secPlotLbl,'String','1000-3000 Hz filter')
- subplot(2,1,2);
+global yf5;
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf5);
+else
  plot(y5);
-
+end
 % --- Executes on button press in bp4.
 function bp4_Callback(hObject, eventdata, handles)
 % hObject    handle to bp4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global y4;
-set(handles.secPlotLbl,'String','600-1000 Hz filter')
- subplot(2,1,2);
+global yf4;
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf4);
+else
  plot(y4);
-
+end
 % --- Executes on button press in pb3.
 function pb3_Callback(hObject, eventdata, handles)
 % hObject    handle to pb3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global y3;
-set(handles.secPlotLbl,'String',' 310-600 Hz filter')
- subplot(2,1,2);
+global yf3;
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf3);
+else
  plot(y3);
-
+end
 % --- Executes on button press in bp2.
 function bp2_Callback(hObject, eventdata, handles)
 % hObject    handle to bp2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global y2;
-set(handles.secPlotLbl,'String','170-310 Hz filter')
- subplot(2,1,2);
+global yf2;
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf2);
+else
  plot(y2);
-
+end
 % --- Executes on button press in bp1.
 function bp1_Callback(hObject, eventdata, handles)
 % hObject    handle to bp1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global y0;
+global yf0;
 set(handles.secPlotLbl,'String','0-170 Hz filter')
- subplot(2,1,2);
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf0);
+else
  plot(y0);
+end
+
 
 
 % --- Executes on button press in bpT.
@@ -637,6 +701,13 @@ function bpT_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global y10;
-set(handles.secPlotLbl,'String','filtered')
- subplot(2,1,2);
+global yf10;
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf10);
+else
  plot(y10);
+end
