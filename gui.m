@@ -92,6 +92,18 @@ global y8;
 global y9;
 global y10;
 
+global yf1;
+global yf2;
+global yf3;
+global yf4;
+global yf5;
+global yf6;
+global yf7;
+global yf8;
+global yf9;
+global yf10;
+
+
         
 [handles.y,handles.Fs] = audioread(handles.fullpathname);
 plot(handles.y);
@@ -182,7 +194,18 @@ end
   
  
  handles.yT=y1+y2+y3+y4+y5+y6+y7+y8+y9;
+ y10=handles.yT;
 
+ yf1=fft(y1);
+ yf2=fft(y2);
+ yf3=fft(y3);
+ yf4=fft(y4);
+ yf5=fft(y5);
+ yf6=fft(y6);
+ yf7=fft(y7);
+ yf8=fft(y8);
+ yf9=fft(y9);
+ yf10=fft( handles.yT);
  
  player = audioplayer(handles.yT, handles.Fs);
  subplot(2,1,1);
@@ -308,7 +331,7 @@ function Play_Callback(hObject, eventdata, handles)
 global player;
 global filterType; % here is the global that holds the type (iir/fir)
 global outputSampleRate; % output sample rate 
-outputSampleRate = get(handles.ost,'String');
+outputSampleRate = get(handles.osr,'String');
 selected=get(handles.filterPanel,'SelectedObject');
 filterType=get(selected,'String');
 play_equalizer(hObject,handles,1);
@@ -681,16 +704,16 @@ function bp1_Callback(hObject, eventdata, handles)
 % hObject    handle to bp1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global y0;
-global yf0;
+global y1;
+global yf1;
 set(handles.secPlotLbl,'String','0-170 Hz filter')
 subplot(2,1,2);
 selected=get(handles.plotType,'SelectedObject');
 plotType=get(selected,'String');
 if strcmp(plotType,'frequancy')
- plot(yf0);
+ plot(yf1);
 else
- plot(y0);
+ plot(y1);
 end
 
 
