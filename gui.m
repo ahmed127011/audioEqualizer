@@ -308,7 +308,7 @@ function Play_Callback(hObject, eventdata, handles)
 global player;
 global filterType; % here is the global that holds the type (iir/fir)
 global outputSampleRate; % output sample rate 
-outputSampleRate = get(handles.ost,'String');
+outputSampleRate = get(handles.osr,'String');
 selected=get(handles.filterPanel,'SelectedObject');
 filterType=get(selected,'String');
 play_equalizer(hObject,handles,1);
