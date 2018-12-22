@@ -79,10 +79,9 @@ varargout{1} = handles.output;
 function play_equalizer(hObject, handles,isFir)
 global player;
 global yArr;
-yArr=[0 170 310 600 1000 3000 6000 12000 14000 16000];
+yArr=[170 310 600 1000 3000 6000 12000 14000 16000];
 global handl;
-global out;
-global y0;
+global y1;
 global y2;
 global y3;
 global y4;
@@ -95,46 +94,97 @@ global y10;
 
         
 [handles.y,handles.Fs] = audioread(handles.fullpathname);
-handles.y
+plot(handles.y);
 handl(1)=get(handles.b1,'value');
 handl(2)=get(handles.b2,'value');
 handl(3)=get(handles.b3,'value');
 handl(4)=get(handles.b4,'value');
 handl(5)=get(handles.b5,'value');
- handl(6)=get(handles.b6,'value');
- handl(7)=get(handles.b7,'value');
- handl(8)=get(handles.b8,'value');
- handl(9)=get(handles.b9,'value');
+handl(6)=get(handles.b6,'value');
+handl(7)=get(handles.b7,'value');
+handl(8)=get(handles.b8,'value');
+handl(9)=get(handles.b9,'value');
 
-
+%lowpass
+ if(isFir)
+     a=fir_low(handles.Fs,yArr(1));
+ else
+     a=IIR1(handles.Fs,yArr(1));
+ end 
+ y1=handl(1)*filter(a,handles.y,1);
 
  
-for i=1:10
-   if(i==1)
-    if(isFir)
-     a=fir_low(handles.Fs,yArr(2));
-    else
-        a=IIR1(handles.Fs,yArr(2));
-    end
-   else
-       if(isFir)
-        a=fir_band(handles.Fs,yArr(i),yArr(i+1));
-     else
-        a=IIR2(handles.Fs,yArr(i),yArr(i+1));
-       end
-   end   
-       out(i)=handl(i)*filter(a,1,handles.y);
+ 
+ %bandpass1
+if(isFir)
+      a=fir_band(handles.Fs,yArr(1),yArr(2));
+else
+        a=IIR2(handles.Fs,yArr(1),yArr(2));
 end
+    y2=handl( 2 )*filter(a,handles.y,1);
 
- %highpass
-cut_off2=16001;
-c=fir1(orde,cut_off2/(handles.Fs/2),'high');
-y10=handles.g9*filter(c,1,handles.y);
-for i=1:10
-    handles.yT=handles.yT+handl(i);
+%bandpass2
+if(isFir)
+      a=fir_band(handles.Fs,yArr(2),yArr(3));
+else
+        a=IIR2(handles.Fs,yArr(2),yArr(3));
 end
-handles.yT=handles.yT+y10;
-player = audioplayer(handles.yT, handles.Fs);
+    y3=handl( 3 )*filter(a,handles.y,1);
+
+%bandpass3
+if(isFir)
+      a=fir_band(handles.Fs,yArr(3),yArr(4));
+else
+        a=IIR2(handles.Fs,yArr(3),yArr(4));
+end
+    y4=handl( 4 )*filter(a,handles.y,1);
+
+%bandpass4
+if(isFir)
+      a=fir_band(handles.Fs,yArr(4),yArr(5));
+else
+        a=IIR2(handles.Fs,yArr(4),yArr(5));
+end
+    y5=handl( 5 )*filter(a,handles.y,1);
+
+%bandpass5
+if(isFir)
+      a=fir_band(handles.Fs,yArr(5),yArr(6));
+else
+        a=IIR2(handles.Fs,yArr(5),yArr(6));
+end
+    y6=handl( 6 )*filter(a,handles.y,1);
+
+%bandpass6
+if(isFir)
+      a=fir_band(handles.Fs,yArr(6),yArr(7));
+else
+        a=IIR2(handles.Fs,yArr(6),yArr(7));
+end
+    y7=handl( 7 )*filter(a,handles.y,1);
+
+%bandpass7
+if(isFir)
+      a=fir_band(handles.Fs,yArr(7),yArr(8));
+else
+        a=IIR2(handles.Fs,yArr(7),yArr(8));
+end
+    y8=handl( 8 )*filter(a,handles.y,1);
+
+%bandpass8
+if(isFir)
+      a=fir_band(handles.Fs,yArr(8),yArr(9));
+else
+        a=IIR2(handles.Fs,yArr(8),yArr(9));
+end
+    y9=handl( 9 )*filter(a,handles.y,1);
+
+  
+ 
+ handles.yT=y1+y2+y3+y4+y5+y6+y7+y8+y9;
+
+ 
+ player = audioplayer(handles.yT, handles.Fs);
  subplot(2,1,1);
  plot(handles.y);
  subplot(2,1,2);
