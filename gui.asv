@@ -576,9 +576,15 @@ function bp9_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global y9;
 global yf9
-plotBoth(handles,y9,yf9,9,'14-16 KHz filter')
-
-
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf9);
+else
+ plot(y9);
+end
 
 % --- Executes on button press in bp8.
 function bp8_Callback(hObject, eventdata, handles)
@@ -587,8 +593,15 @@ function bp8_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global y8;
 global yf8;
-plotBoth(handles,y8,yf8,8,'12-14 KHz filter')
-
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf8);
+else
+ plot(y8);
+end
 
 % --- Executes on button press in bp7.
 function bp7_Callback(hObject, eventdata, handles)
@@ -597,8 +610,15 @@ function bp7_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global y7;
 global yf7;
-plotBoth(handles,y7,yf7,7,'6-12 KHz filter')
-
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf7);
+else
+ plot(y7);
+end
 
 % --- Executes on button press in bp6.
 function bp6_Callback(hObject, eventdata, handles)
@@ -607,10 +627,15 @@ function bp6_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global y6;
 global yf6;
-plotBoth(handles,y6,yf6,6,'3-6 KHz filter')
-
-
-
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf6);
+else
+ plot(y6);
+end
 % --- Executes on button press in bp5.
 function bp5_Callback(hObject, eventdata, handles)
 % hObject    handle to bp5 (see GCBO)
@@ -618,8 +643,15 @@ function bp5_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global y5;
 global yf5;
-plotBoth(handles,y5,yf5,5,'1-3 KHz filter')
-
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf5);
+else
+ plot(y5);
+end
 % --- Executes on button press in bp4.
 function bp4_Callback(hObject, eventdata, handles)
 % hObject    handle to bp4 (see GCBO)
@@ -627,12 +659,15 @@ function bp4_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global y4;
 global yf4;
-plotBoth(handles,y4,yf4,4,'600-1000 Hz filter')
-
-
-
-
-
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf4);
+else
+ plot(y4);
+end
 % --- Executes on button press in pb3.
 function pb3_Callback(hObject, eventdata, handles)
 % hObject    handle to pb3 (see GCBO)
@@ -640,10 +675,15 @@ function pb3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global y3;
 global yf3;
-plotBoth(handles,y3,yf3,3,'310-600 Hz filter')
-
-
-
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf3);
+else
+ plot(y3);
+end
 % --- Executes on button press in bp2.
 function bp2_Callback(hObject, eventdata, handles)
 % hObject    handle to bp2 (see GCBO)
@@ -651,14 +691,15 @@ function bp2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global y2;
 global yf2;
-plotBoth(handles,y2,yf2,2,'170-310 Hz filter')
-
-
-
-
-
-
-
+set(handles.secPlotLbl,'String','0-170 Hz filter')
+subplot(2,1,2);
+selected=get(handles.plotType,'SelectedObject');
+plotType=get(selected,'String');
+if strcmp(plotType,'frequancy')
+ plot(yf2);
+else
+ plot(y2);
+end
 % --- Executes on button press in bp1.
 function bp1_Callback(hObject, eventdata, handles)
 % hObject    handle to bp1 (see GCBO)
@@ -705,10 +746,9 @@ if strcmp(plotType,'frequancy')
  subplot(2,1,1);
  plot(abs(fft(yf10/handl(handlN))));
 else
-  subplot(2,1,2);
  plot(y10);
  subplot(2,1,1);
- plot((y10/handl(handlN)));
+ plot((yf10/handl(handlN)));
 end
 
 
