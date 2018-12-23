@@ -76,7 +76,8 @@ varargout{1} = handles.output;
 
 %=======================================================
 
-function play_equalizer(hObject, handles,isFir,osr)
+function play_equalizer(hObject, handles,isFir,sampleRate)
+
 global player;
 global yArr;
 yArr=[170 310 600 1000 3000 6000 12000 14000 16000];
@@ -195,6 +196,14 @@ end
   
  
  handles.yT=y1+y2+y3+y4+y5+y6+y7+y8+y9;
+ if(strcmp(sampleRate,'0.5'))
+     handles.yT= resample(handles.yT,1,2);
+ else
+     if(strcmp(sampleRate,'2'))
+         handles.yT= resample(handles.yT,2,1);
+     end
+ end
+ 
  y10=handles.yT;
 
  yf1=abs(fft(y1));
@@ -208,7 +217,7 @@ end
  yf9=abs(fft(y9));
 
  yf10=abs(fft( handles.yT));
- 
+
  player = audioplayer(handles.yT, handles.Fs);
  subplot(2,1,1);
  plot(handles.y);
