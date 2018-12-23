@@ -712,7 +712,7 @@ if strcmp(plotType,'frequancy')
  subplot(2,1,2);
  plot(yf10);
  subplot(2,1,1);
- plot(abs(fft(yf10/handl(handlN))));
+ plot(abs(fft(y10/handl(handlN))));
 else
   subplot(2,1,2);
  plot(y10);
