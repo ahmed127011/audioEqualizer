@@ -231,8 +231,6 @@ end
  yf10=abs(fft( handles.yT));
 
  player = audioplayer(handles.yT, handles.Fs);
- 
- %plotting the signal in time domain 
  subplot(2,1,1);
  plot(handles.y);
  subplot(2,1,2);
