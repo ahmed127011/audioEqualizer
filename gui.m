@@ -22,7 +22,7 @@ function varargout = gui(varargin)
 
 % Edit the above text to modify the response to help gui
 
-% Last Modified by GUIDE v2.5 23-Dec-2018 01:15:01
+% Last Modified by GUIDE v2.5 23-Dec-2018 02:26:36
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -734,3 +734,10 @@ if strcmp(plotType,'frequancy')
 else
  plot(y10);
 end
+
+
+% --- Executes during object creation, after setting all properties.
+function plotType_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to plotType (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
