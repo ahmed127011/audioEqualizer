@@ -76,7 +76,7 @@ varargout{1} = handles.output;
 
 %=======================================================
 
-function play_equalizer(hObject, handles,isFir)
+function play_equalizer(hObject, handles,isFir,osr)
 global player;
 global yArr;
 yArr=[170 310 600 1000 3000 6000 12000 14000 16000];
@@ -330,12 +330,11 @@ function Play_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global player;
-global filterType; % here is the global that holds the type (iir/fir)
-global outputSampleRate; % output sample rate 
-outputSampleRate = get(handles.osr,'String');
+selectedOsr=get(handles.osr,'SelectedObject');
+Osr=get(selectedOsr,'String');
 selected=get(handles.filterPanel,'SelectedObject');
 filterType=get(selected,'String');
-play_equalizer(hObject,handles,strcmp(filterType,'fir'));
+play_equalizer(hObject,handles,strcmp(filterType,'fir'),Osr); % osr = 1 ,2 , 0.5
 play(player);
 guidata(hObject,handles)
 
